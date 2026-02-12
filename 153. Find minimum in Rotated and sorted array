@@ -1,0 +1,24 @@
+# Find minimum in rotated and sorted array 
+class Solution(object):
+    def findMin(self, arr):
+        low, high = 0, len(arr) - 1
+        ans = float("inf")
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            # If entire segment is sorted already
+            if arr[low] <= arr[high]:
+                ans = min(ans, arr[low])
+                break
+
+            # If left half is sorted
+            if arr[low] <= arr[mid]:
+                ans = min(ans, arr[low])
+                low = mid + 1
+            else:
+                # Otherwise right half is sorted
+                ans = min(ans, arr[mid])
+                high = mid - 1
+
+        return ans
